@@ -1,0 +1,173 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.625rem;
+  /* TraceFilms Color Palette - Parchment and Earth Tones */
+  --background: #f8f6f0; /* Parchment background */
+  --foreground: #2d1810; /* Dark brown text */
+  --card: #ffffff;
+  --card-foreground: #2d1810;
+  --popover: #ffffff;
+  --popover-foreground: #2d1810;
+  --primary: #8b4513; /* Saddle brown from tree */
+  --primary-foreground: #f8f6f0;
+  --secondary: #d2b48c; /* Tan */
+  --secondary-foreground: #2d1810;
+  --muted: #e6ddd4; /* Light parchment */
+  --muted-foreground: #6b5b4f;
+  --accent: #a0522d; /* Sienna */
+  --accent-foreground: #f8f6f0;
+  --destructive: #dc2626;
+  --border: #d2b48c;
+  --input: #ffffff;
+  --ring: #8b4513;
+  --chart-1: #8b4513;
+  --chart-2: #a0522d;
+  --chart-3: #cd853f;
+  --chart-4: #daa520;
+  --chart-5: #b8860b;
+  --sidebar: #f8f6f0;
+  --sidebar-foreground: #2d1810;
+  --sidebar-primary: #8b4513;
+  --sidebar-primary-foreground: #f8f6f0;
+  --sidebar-accent: #e6ddd4;
+  --sidebar-accent-foreground: #2d1810;
+  --sidebar-border: #d2b48c;
+  --sidebar-ring: #8b4513;
+}
+
+.dark {
+  --background: #1a1410;
+  --foreground: #f8f6f0;
+  --card: #2d1810;
+  --card-foreground: #f8f6f0;
+  --popover: #2d1810;
+  --popover-foreground: #f8f6f0;
+  --primary: #d2b48c;
+  --primary-foreground: #2d1810;
+  --secondary: #3d2817;
+  --secondary-foreground: #f8f6f0;
+  --muted: #3d2817;
+  --muted-foreground: #a0522d;
+  --accent: #3d2817;
+  --accent-foreground: #f8f6f0;
+  --destructive: #ef4444;
+  --border: #3d2817;
+  --input: #3d2817;
+  --ring: #d2b48c;
+  --chart-1: #d2b48c;
+  --chart-2: #daa520;
+  --chart-3: #cd853f;
+  --chart-4: #b8860b;
+  --chart-5: #a0522d;
+  --sidebar: #1a1410;
+  --sidebar-foreground: #f8f6f0;
+  --sidebar-primary: #d2b48c;
+  --sidebar-primary-foreground: #2d1810;
+  --sidebar-accent: #3d2817;
+  --sidebar-accent-foreground: #f8f6f0;
+  --sidebar-border: #3d2817;
+  --sidebar-ring: #d2b48c;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'EB Garamond', serif;
+  }
+}
+
+/* Custom TraceFilms Styles */
+.sanskrit-text {
+  font-family: 'Sanskrit Text', serif;
+  font-weight: 400;
+}
+
+.cinematic-gradient {
+  background: linear-gradient(135deg, #f8f6f0 0%, #e6ddd4 50%, #d2b48c 100%);
+}
+
+.tree-shadow {
+  filter: drop-shadow(0 10px 20px rgba(45, 24, 16, 0.3));
+}
+
+.mythic-glow {
+  box-shadow: 0 0 30px rgba(139, 69, 19, 0.2);
+}
+
+.elegant-transition {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portal-entrance {
+  animation: portalEntrance 0.8s ease-out;
+}
+
+@keyframes portalEntrance {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.login-modal-backdrop {
+  backdrop-filter: blur(8px);
+  background: rgba(45, 24, 16, 0.4);
+}
+
+.parchment-texture {
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(139, 69, 19, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(160, 82, 45, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(210, 180, 140, 0.05) 0%, transparent 50%);
+}
+
