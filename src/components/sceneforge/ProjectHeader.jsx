@@ -17,7 +17,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { generateScriptMarkdown, downloadMarkdownFile, generateProjectSummary } from '../lib/exportUtils';
+import { generateScriptMarkdown, downloadMarkdownFile, generateProjectSummary } from '../../lib/sceneforge/exportUtils';
 
 const ProjectHeader = ({ 
   project, 
@@ -45,41 +45,17 @@ const ProjectHeader = ({
 
   const handleExportPDF = async () => {
     try {
-      // Generate markdown content
+      // Generate markdown content for local PDF conversion
       const markdown = generateScriptMarkdown(project);
       
-      // Create a temporary file for conversion
-      const response = await fetch('/api/export-pdf', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          markdown,
-          title: project.title
-        })
-      });
-      
-      if (response.ok) {
-        const blob = await response.blob();
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `${project.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_script.pdf`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-        toast.success('Script exported as PDF successfully!');
-      } else {
-        // Fallback to markdown export
-        handleExportMarkdown();
-        toast.info('PDF export not available, exported as Markdown instead');
-      }
+      // For now, fallback to markdown export since we're fully local
+      // In the future, this could use a local PDF generation library
+      handleExportMarkdown();
+      toast.info('PDF export will be available in future versions. Exported as Markdown for now.');
     } catch (error) {
       // Fallback to markdown export
       handleExportMarkdown();
-      toast.info('PDF export not available, exported as Markdown instead');
+      toast.info('Exported as Markdown instead');
     }
   };
 

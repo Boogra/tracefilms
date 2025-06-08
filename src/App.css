@@ -1,0 +1,241 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Sanskrit+Text&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'EB Garamond', serif;
+  background-color: #f5f5dc; /* Parchment fallback */
+}
+
+/* Parchment Background */
+body {
+  background-image: url('./assets/parchment_background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+/* Typography */
+.sanskrit-text {
+  font-family: 'Sanskrit Text', serif;
+}
+
+.garamond-text {
+  font-family: 'EB Garamond', serif;
+}
+
+/* TraceFilms Color Palette */
+:root {
+  --tf-primary-brown: #693914;
+  --tf-dark-brown: #110D0C;
+  --tf-accent-gold: #D4AF37;
+  --tf-antique-ivory: #F5F5DC;
+  --tf-parchment: #F4F1E8;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--tf-parchment);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--tf-primary-brown);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--tf-dark-brown);
+}
+
+/* Button Styles */
+.btn-primary {
+  background-color: var(--tf-primary-brown);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--tf-dark-brown);
+  transform: translateY(-1px);
+}
+
+/* Form Styles */
+.form-input {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  padding: 0.75rem;
+  font-family: 'EB Garamond', serif;
+  transition: all 0.2s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--tf-primary-brown);
+  box-shadow: 0 0 0 3px rgba(105, 57, 20, 0.1);
+}
+
+/* Modal Styles */
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background-image: url('./assets/parchment_background.png');
+  background-size: cover;
+  background-blend-mode: overlay;
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+/* Banner Styles - Centered and Full Width */
+.banner-centered {
+  background-color: var(--tf-dark-brown);
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  position: relative;
+}
+
+/* Tree Logo Integration - Seamless, No Borders */
+.tree-logo-seamless {
+  filter: brightness(1.1) contrast(1.1);
+  transition: all 0.3s ease;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: none !important;
+}
+
+.tree-logo-seamless:hover {
+  filter: brightness(1.2) contrast(1.2);
+  transform: scale(1.02);
+}
+
+/* Remove any potential borders or shadows from images */
+img {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* SceneForge Embedded Styles */
+.sceneforge-container {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+/* Clean Interface - Remove any unwanted UI elements */
+.clean-interface {
+  position: relative;
+}
+
+/* Hide any login buttons or UI elements that shouldn't be visible */
+.hidden-login-ui {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .banner-text {
+    font-size: 3rem;
+    letter-spacing: 0.2em;
+  }
+  
+  .tree-logo-mobile {
+    height: 4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-text {
+    font-size: 2rem;
+    letter-spacing: 0.1em;
+  }
+  
+  .tree-logo-mobile {
+    height: 3rem;
+  }
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hide Manus Badge and Any External Branding */
+[data-manus], 
+.manus-badge,
+[class*="manus"],
+[id*="manus"],
+iframe[src*="manus"],
+div[style*="manus"],
+a[href*="manus.space"],
+.login-button,
+.bottom-right-login {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+
+/* Ensure no visible login buttons anywhere */
+button[class*="login"]:not(.modal button),
+a[class*="login"]:not(.modal a),
+div[class*="login"]:not(.modal div) {
+  display: none !important;
+}
+
+/* Clean, minimal interface */
+.minimal-interface {
+  background: none;
+  border: none;
+  outline: none;
+}
+

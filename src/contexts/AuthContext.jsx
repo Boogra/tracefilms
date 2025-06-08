@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext();
 
@@ -12,24 +12,36 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  
+  // Updated API base URL for production
+  const API_BASE = 'https://env.manus.space/api';
 
-  const API_BASE = 'https://rxlhyimc7nnv.manus.space/api';
+  // Check session on mount - don't hang if it fails
+  useEffect(() => {
+    checkSession();
+  }, []);
 
   const checkSession = async () => {
     try {
+      setLoading(true);
       const response = await fetch(`${API_BASE}/auth/check-session`, {
-        credentials: 'include'
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
-      
+
       if (response.ok) {
         const data = await response.json();
-        if (data.authenticated) {
+        if (data.authenticated && data.user) {
           setUser(data.user);
         }
       }
     } catch (error) {
-      console.error('Session check failed:', error);
+      console.log('Session check failed, continuing without authentication');
+      // Don't hang - just continue
     } finally {
       setLoading(false);
     }
@@ -37,32 +49,38 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (username, password) => {
     try {
+      setLoading(true);
       const response = await fetch(`${API_BASE}/auth/login`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
-        credentials: 'include',
         body: JSON.stringify({ username, password }),
       });
 
       const data = await response.json();
 
-      if (response.ok) {
+      if (response.ok && data.success) {
         setUser(data.user);
-        return { success: true };
+        return { success: true, user: data.user };
       } else {
-        return { success: false, error: data.error };
+        throw new Error(data.message || 'Login failed');
       }
     } catch (error) {
-      return { success: false, error: 'Network error occurred' };
+      console.error('Login error:', error);
+      throw error;
+    } finally {
+      setLoading(false);
     }
   };
 
   const register = async (username, email, password) => {
     try {
+      setLoading(true);
       const response = await fetch(`${API_BASE}/auth/register`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -71,13 +89,16 @@ export const AuthProvider = ({ children }) => {
 
       const data = await response.json();
 
-      if (response.ok) {
+      if (response.ok && data.success) {
         return { success: true, message: data.message };
       } else {
-        return { success: false, error: data.error };
+        throw new Error(data.message || 'Registration failed');
       }
     } catch (error) {
-      return { success: false, error: 'Network error occurred' };
+      console.error('Registration error:', error);
+      throw error;
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -101,6 +122,8 @@ export const AuthProvider = ({ children }) => {
     register,
     logout,
     checkSession,
+    isAuthenticated: !!user,
+    isAdmin: user?.is_admin || false,
   };
 
   return (

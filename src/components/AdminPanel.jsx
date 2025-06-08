@@ -16,7 +16,8 @@ const AdminPanel = () => {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState({ type: '', text: '' });
 
-  const API_BASE = 'https://rxlhyimc7nnv.manus.space/api';
+  // Use environment variable or fallback to production API
+  const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://env.manus.space/api';
 
   useEffect(() => {
     fetchData();

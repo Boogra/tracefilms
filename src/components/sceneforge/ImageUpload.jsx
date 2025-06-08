@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Upload, X, Image as ImageIcon } from 'lucide-react';
 import { toast } from 'sonner';
-import { createImagePreview, validateImageFile } from '../lib/fileUtils';
+import { validateImageFile, createImagePreview } from '../../lib/sceneforge/fileUtils';
 
 const ImageUpload = ({ 
   value, 
